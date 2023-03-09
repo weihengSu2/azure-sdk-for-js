@@ -696,3 +696,40 @@ export function createWindowsBadgeNotificationBody(
 
   return stringifyXML(badge, { rootName: "badge" });
 }
+
+/**
+ * Describes Xiaomi notification messages.
+ */
+export interface XiaomiNativeNotification {
+  /**
+   * The notification's title.
+   */
+  title?: string;
+
+  /**
+   * The notification's body text.
+   */
+  payload?: string;
+  
+  /**
+   * The notification description
+   */
+  description?: string
+}
+
+export interface XiaomiNativeMessage extends Record<string, any> {
+  /**
+   * The notification payload to send with the message.
+   */
+  notification?: XiaomiNativeNotification;
+}
+
+/**
+ * Creates a Xiaomi native message to send to Notification Hubs.
+ * @param nativeMessage - The Xiaomi message properties to set.
+ * @param additionalProperties - Additional properties for Xiaomi messages.
+ * @returns An XiaomiNotification to send to Notification Hubs.
+ */
+export function createXiaomiNotificationBody(nativeMessage: XiaomiNativeMessage): string {
+  return JSON.stringify(nativeMessage);
+}
